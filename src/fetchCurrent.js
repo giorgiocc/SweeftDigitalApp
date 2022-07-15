@@ -6,7 +6,7 @@ import CurrentView from './currentView';
 const WeatherMainComp = () => {
   const [isLoading] = useState(false);
   const [data, setData] = useState([]);
-  const [res, setRes] = useState([]);
+  const [idResult, setidResult] = useState([]);
 
   const citiesList = [611717, 613607, 615532];
   const apiUrl =
@@ -18,8 +18,8 @@ const WeatherMainComp = () => {
         fetch(apiUrl + city).then(response => response.json()),
       ),
     )
-      .then(data => {
-        setData(data);
+      .then(currentData => {
+        setData(currentData);
       })
       .catch(error => console.error(error));
   }, []);
@@ -35,13 +35,13 @@ const WeatherMainComp = () => {
             data={data}
             renderItem={({item, index}) => (
               <>
-                <CurrentView setRes={setRes} item={item} />
+                <CurrentView setRes={setidResult} item={item} />
               </>
             )}
           />
         </View>
       )}
-      <ForecastView data={res} />
+      <ForecastView data={idResult} />
     </View>
   );
 };
